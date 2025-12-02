@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiwutOS - The Future of Independent Computing</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .btn-download {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        header {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            max-width: 800px;
+        }
+
+        h1 span { color: var(--primary); }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+        .os-preview {
+            width: 100%;
+            max-width: 900px;
+            height: 500px;
+            background-color: #0000AA;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .os-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #CCCCCC;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .os-window {
+            width: 600px;
+            height: 350px;
+            background-color: black;
+            border: 2px solid white;
+            color: white;
+            padding: 10px;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.3);
+        }
+
+        .os-text {
+            color: #0F0;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+        #features {
+            padding: 5rem 5%;
+            background-color: #0b1120;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .section-title p { color: var(--text-muted); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .card h3 { margin-bottom: 0.5rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        #code {
+            padding: 5rem 5%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .code-block {
+            background: #0d1117;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #30363d;
+            font-family: 'Courier New', monospace;
+            color: #c9d1d9;
+            overflow-x: auto;
+        }
+
+        .kwd { color: #ff7b72; }
+        .func { color: #d2a8ff; }
+        .str { color: #a5d6ff; }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .os-preview { height: 300px; }
+            .os-window { width: 90%; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">TiwutOS</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#code">Source Code</a>
+            <a href="#about">About</a>
+            <a href="#" class="btn-download">Download ISO</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>An Independent Kernel <br><span>Built from Scratch</span></h1>
+        <p class="subtitle">Not Linux. Not Windows. TiwutOS is a custom-built 32-bit operating system featuring a hybrid kernel, Python-style scripting, and a clean interface.</p>
+        
+        <div class="cta-buttons">
+            <a href="v1.1/TiwutOS.iso" class="btn btn-primary">Download v1.1</a>
+            <a href="https://github.com/tiwut/TiwutOS" class="btn btn-secondary">View on GitHub</a>
+        </div>
+
+        <img src="v1.1/screenshot.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+    </header>
+
+    <section id="features">
+        <div class="section-title">
+            <h2>Why TiwutOS?</h2>
+            <p>Designed for education, minimalism, and total control.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🐍</div>
+                <h3>Python Support</h3>
+                <p>Integrated Mini-Python interpreter allows for on-the-fly scripting and calculation directly within the kernel environment.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📂</div>
+                <h3>Virtual Filesystem</h3>
+                <p>A custom implementation of a VFS allowing file creation (touch), reading (cat), and listing (ls) entirely in memory.</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Custom C Kernel</h3>
+                <p>Built on a 32-bit protected mode kernel written in C and Assembly, bypassing standard bloat found in modern OSs.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🖥️</div>
+                <h3>Hybrid GUI</h3>
+                <p>Features a custom VGA text-mode Graphical User Interface with window management simulation and mouse support.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-title">
+            <h2></h2>
+    </div>
+
+    <div class="section-title">
+            <h2></h2>
+    </div>
+
+    <div class="section-title">
+            <h2>Source Code</h2>
+    </div>
+
+    <section id="code">
+        
+        <div class="code-block">
+            <pre><code>
+
+            <span class="kwd">#define</span> VGA_ADDRESS 0xB8000
+            <span class="kwd">#define</span> BUFSIZE 256
+
+            <span class="kwd">enum</span> Colors {
+                BLACK = 0, BLUE = 1, GREEN = 2, CYAN = 3, RED = 4,
+                MAGENTA = 5, BROWN = 6, LIGHT_GREY = 7, DARK_GREY = 8,
+                LIGHT_BLUE = 9, LIGHT_GREEN = 10, LIGHT_CYAN = 11,
+                LIGHT_RED = 12, LIGHT_MAGENTA = 13, YELLOW = 14, WHITE = 15
+            };
+
+            <span class="kwd">unsigned short</span>* terminal_buffer = (<span class="kwd">unsigned short</span>*)VGA_ADDRESS;
+            <span class="kwd">int</span> cursor_x = 0;
+            <span class="kwd">int</span> cursor_y = 2;
+            <span class="kwd">int</span> width = 80;
+            <span class="kwd">int</span> height = 25;
+
+            <span class="kwd">unsigned char</span> <span class="func">port_byte_in</span>(<span class="kwd">unsigned short</span> port) {
+                <span class="kwd">unsigned char</span> result;
+                __asm__(<span class="str">"in %%dx, %%al"</span> : <span class="str">"=a"</span> (result) : <span class="str">"d"</span> (port));
+                <span class="kwd">return</span> result;
+            }
+
+            <span class="kwd">void</span> <span class="func">port_byte_out</span>(<span class="kwd">unsigned short</span> port, <span class="kwd">unsigned char</span> data) {
+                __asm__(<span class="str">"out %%al, %%dx"</span> : : <span class="str">"a"</span> (data), <span class="str">"d"</span> (port));
+            }
+
+            <span class="kwd">void</span> <span class="func">set_cursor</span>(<span class="kwd">int</span> x, <span class="kwd">int</span> y) {
+                <span class="kwd">unsigned short</span> pos = y * width + x;
+                <span class="func">port_byte_out</span>(0x3D4, 0x0F);
+                <span class="func">port_byte_out</span>(0x3D5, (<span class="kwd">unsigned char</span>)(pos & 0xFF));
+                <span class="func">port_byte_out</span>(0x3D4, 0x0E);
+                <span class="func">port_byte_out</span>(0x3D5, (<span class="kwd">unsigned char</span>)((pos >> 8) & 0xFF));
+            }
+
+            <span class="kwd">void</span> <span class="func">clear_screen</span>(<span class="kwd">unsigned char</span> bg_color) {
+                <span class="kwd">unsigned short</span> clear_char = 0x20 | (bg_color << 12) | (WHITE << 8);
+                <span class="kwd">for</span> (<span class="kwd">int</span> i = 0; i < width * height; i++) {
+                    terminal_buffer[i] = clear_char;
+                }
+                cursor_x = 0;
+                cursor_y = 2;
+            }
+
+            <span class="kwd">void</span> <span class="func">draw_ui</span>() {
+                <span class="func">clear_screen</span>(BLUE);
+
+                <span class="kwd">unsigned short</span> bar_color = (LIGHT_GREY << 12) | (BLACK << 8);
+                <span class="kwd">for</span> (<span class="kwd">int</span> i = 0; i < width; i++) {
+                    terminal_buffer[i] = ' ' | bar_color;
+                }
+                
+                <span class="kwd">const char</span>* title = <span class="str">" TiwutOS - Desktop Environment "</span>;
+                <span class="kwd">int</span> i = 0;
+                <span class="kwd">while</span>(title[i] != 0) {
+                    terminal_buffer[i] = title[i] | bar_color;
+                    i++;
+                }
+
+                <span class="kwd">int</span> win_x = 5, win_y = 3, win_w = 70, win_h = 18;
+                <span class="kwd">unsigned short</span> win_bg = (BLACK << 12) | (WHITE << 8);
+                <span class="kwd">unsigned short</span> win_border = (WHITE << 12) | (BLACK << 8);
+
+                <span class="kwd">for</span> (<span class="kwd">int</span> y = win_y; y < win_y + win_h; y++) {
+                    <span class="kwd">for</span> (<span class="kwd">int</span> x = win_x; x < win_x + win_w; x++) {
+                        <span class="kwd">if</span> (y == win_y || y == win_y + win_h - 1 || x == win_x || x == win_x + win_w - 1)
+                            terminal_buffer[y * width + x] = '#' | win_border;
+                        <span class="kwd">else</span>
+                            terminal_buffer[y * width + x] = ' ' | win_bg;
+                    }
+                }
+                
+                cursor_x = win_x + 2;
+                cursor_y = win_y + 2;
+            }
+
+            <span class="kwd">void</span> <span class="func">print</span>(<span class="kwd">char</span>* str) {
+                <span class="kwd">unsigned short</span> attrib = (BLACK << 12) | (WHITE << 8);
+                <span class="kwd">int</span> i = 0;
+                <span class="kwd">while</span> (str[i] != 0) {
+                    <span class="kwd">if</span> (str[i] == '\n') {
+                        cursor_x = 7;
+                        cursor_y++;
+                    } <span class="kwd">else</span> {
+                        terminal_buffer[cursor_y * width + cursor_x] = str[i] | attrib;
+                        cursor_x++;
+                    }
+                    i++;
+                }
+                <span class="func">set_cursor</span>(cursor_x, cursor_y);
+            }
+
+            <span class="kwd">int</span> <span class="func">strcmp</span>(<span class="kwd">char</span>* s1, <span class="kwd">char</span>* s2) {
+                <span class="kwd">while</span> (*s1 && (*s1 == *s2)) { s1++; s2++; }
+                <span class="kwd">return</span> *(<span class="kwd">unsigned char</span>*)s1 - *(<span class="kwd">unsigned char</span>*)s2;
+            }
+
+            <span class="kwd">void</span> <span class="func">strcpy</span>(<span class="kwd">char</span>* dest, <span class="kwd">char</span>* src) {
+                <span class="kwd">while</span> (*src) { *dest++ = *src++; }
+                *dest = 0;
+            }
+
+            <span class="kwd">int</span> <span class="func">strncmp</span>(<span class="kwd">char</span>* s1, <span class="kwd">char</span>* s2, <span class="kwd">int</span> n) {
+                <span class="kwd">while</span> (n > 0 && *s1 && (*s1 == *s2)) { s1++; s2++; n--; }
+                <span class="kwd">if</span> (n == 0) <span class="kwd">return</span> 0;
+                <span class="kwd">return</span> *(<span class="kwd">unsigned char</span>*)s1 - *(<span class="kwd">unsigned char</span>*)s2;
+            }
+
+            <span class="kwd">struct</span> File {
+                <span class="kwd">char</span> name[32];
+                <span class="kwd">char</span> content[128];
+            };
+
+            <span class="kwd">struct</span> File fs[5];
+            <span class="kwd">int</span> file_count = 0;
+
+            <span class="kwd">void</span> <span class="func">fs_init</span>() {
+                <span class="func">strcpy</span>(fs[0].name, <span class="str">"readme.txt"</span>);
+                <span class="func">strcpy</span>(fs[0].content, <span class="str">"Welcome to TiwutOS! This is a virtual file."</span>);
+                file_count = 1;
+            }
+
+            <span class="kwd">void</span> <span class="func">fs_create</span>(<span class="kwd">char</span>* name, <span class="kwd">char</span>* content) {
+                <span class="kwd">if</span> (file_count < 5) {
+                    <span class="func">strcpy</span>(fs[file_count].name, name);
+                    <span class="func">strcpy</span>(fs[file_count].content, content);
+                    file_count++;
+                    <span class="func">print</span>(<span class="str">"File created.\n"</span>);
+                } <span class="kwd">else</span> {
+                    <span class="func">print</span>(<span class="str">"Disk full (Memory limit).\n"</span>);
+                }
+            }
+
+            <span class="kwd">void</span> <span class="func">fs_cat</span>(<span class="kwd">char</span>* name) {
+                <span class="kwd">for</span> (<span class="kwd">int</span> i = 0; i < file_count; i++) {
+                    <span class="kwd">if</span> (<span class="func">strcmp</span>(fs[i].name, name) == 0) {
+                        <span class="func">print</span>(fs[i].content);
+                        <span class="func">print</span>(<span class="str">"\n"</span>);
+                        <span class="kwd">return</span>;
+                    }
+                }
+                <span class="func">print</span>(<span class="str">"File not found.\n"</span>);
+            }
+
+            <span class="kwd">void</span> <span class="func">run_python</span>(<span class="kwd">char</span>* code) {
+                <span class="func">print</span>(<span class="str">"[Python] Executing...\n"</span>);
+                
+                <span class="kwd">if</span> (<span class="func">strncmp</span>(code, <span class="str">"print(\""</span>, 7) == 0) {
+                    <span class="kwd">char</span>* msg_start = code + 7;
+                    <span class="kwd">char</span> buffer[64];
+                    <span class="kwd">int</span> i = 0;
+                    <span class="kwd">while</span> (msg_start[i] != '"' && msg_start[i] != 0) {
+                        buffer[i] = msg_start[i];
+                        i++;
+                    }
+                    buffer[i] = 0;
+                    <span class="func">print</span>(buffer);
+                    <span class="func">print</span>(<span class="str">"\n"</span>);
+                }
+                <span class="kwd">else if</span> (<span class="func">strcmp</span>(code, <span class="str">"os.name"</span>) == 0) {
+                    <span class="func">print</span>(<span class="str">"'tiwut-os'\n"</span>);
+                }
+                <span class="kwd">else</span> {
+                    <span class="func">print</span>(<span class="str">"Syntax Error: Unknown command\n"</span>);
+                }
+            }
+
+            <span class="kwd">char</span> kbd_map[128] = {
+                0,  27, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '\b',
+                '\t', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',
+                0, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`', 0,
+                '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0, '*', 0, ' '
+            };
+
+            <span class="kwd">void</span> <span class="func">kernel_main</span>() {
+                <span class="func">draw_ui</span>();
+                <span class="func">fs_init</span>();
+                
+                <span class="func">print</span>(<span class="str">"Welcome to TiwutOS Terminal\n"</span>);
+                <span class="func">print</span>(<span class="str">"Type 'python' to interpret code.\n"</span>);
+                <span class="func">print</span>(<span class="str">"Type 'ls', 'cat <file>', 'touch <file>'.\n"</span>);
+                <span class="func">print</span>(<span class="str">"root@tiwut:~$ "</span>);
+
+                <span class="kwd">char</span> buffer[BUFSIZE];
+                <span class="kwd">int</span> buf_idx = 0;
+
+                <span class="kwd">while</span> (1) {
+                    <span class="kwd">unsigned char</span> status = <span class="func">port_byte_in</span>(0x64);
+                    <span class="kwd">if</span> (status & 0x01) {
+                        <span class="kwd">unsigned char</span> scancode = <span class="func">port_byte_in</span>(0x60);
+                        
+                        <span class="kwd">if</span> (scancode & 0x80) <span class="kwd">continue</span>;
+
+                        <span class="kwd">char</span> c = kbd_map[scancode];
+                        
+                        <span class="kwd">if</span> (c == '\n') {
+                            buffer[buf_idx] = 0;
+                            <span class="func">print</span>(<span class="str">"\n"</span>);
+
+                            <span class="kwd">if</span> (<span class="func">strcmp</span>(buffer, <span class="str">"help"</span>) == 0) {
+                                <span class="func">print</span>(<span class="str">"Cmds: ls, touch, cat, python, clear\n"</span>);
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strcmp</span>(buffer, <span class="str">"ls"</span>) == 0) {
+                                <span class="kwd">for</span>(<span class="kwd">int</span> i=0; i<file_count; i++) {
+                                    <span class="func">print</span>(fs[i].name); <span class="func">print</span>(<span class="str">"  "</span>);
+                                }
+                                <span class="func">print</span>(<span class="str">"\n"</span>);
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strcmp</span>(buffer, <span class="str">"clear"</span>) == 0) {
+                                <span class="func">draw_ui</span>();
+                                <span class="func">print</span>(<span class="str">"root@tiwut:~$ "</span>);
+                                buf_idx = 0;
+                                <span class="kwd">continue</span>;
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strncmp</span>(buffer, <span class="str">"touch "</span>, 6) == 0) {
+                                <span class="func">fs_create</span>(buffer + 6, <span class="str">"Empty File"</span>);
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strncmp</span>(buffer, <span class="str">"cat "</span>, 4) == 0) {
+                                <span class="func">fs_cat</span>(buffer + 4);
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strncmp</span>(buffer, <span class="str">"python "</span>, 7) == 0) {
+                                <span class="func">run_python</span>(buffer + 7);
+                            }
+                            <span class="kwd">else if</span> (<span class="func">strcmp</span>(buffer, <span class="str">""</span>) != 0) {
+                                <span class="func">print</span>(<span class="str">"Unknown command.\n"</span>);
+                            }
+
+                            <span class="func">print</span>(<span class="str">"root@tiwut:~$ "</span>);
+                            buf_idx = 0;
+                        } 
+                        <span class="kwd">else if</span> (c == '\b') {
+                            <span class="kwd">if</span> (buf_idx > 0) {
+                                buf_idx--;
+                                cursor_x--;
+                                terminal_buffer[cursor_y * width + cursor_x] = (' ' | ((BLACK << 12) | (WHITE << 8)));
+                                <span class="func">set_cursor</span>(cursor_x, cursor_y);
+                            }
+                        }
+                        <span class="kwd">else if</span> (c != 0) {
+                            buffer[buf_idx++] = c;
+                            <span class="kwd">char</span> temp[2] = {c, 0};
+                            <span class="func">print</span>(temp);
+                        }
+                        
+                        <span class="kwd">for</span>(<span class="kwd">int</span> i=0; i<1000000; i++); 
+                    }
+                }
+            }
+            </code></pre>
+        </div>
+    </section>
+
+    <footer id="about">
+        <h3>TiwutOS Project</h3>
+        <p>Programmed with NASM & C. Built for the future.</p>
+        <br>
+        <p>&copy; 2025 Tiwut. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
