@@ -1,0 +1,1 @@
+/mnt/c/Users/Tiwut/Downloads/TiwutOS/target/x86_64-my_os/debug/my_os: /mnt/c/Users/Tiwut/Downloads/TiwutOS/build.rs /mnt/c/Users/Tiwut/Downloads/TiwutOS/src/main.rs /mnt/c/Users/Tiwut/Downloads/TiwutOS/user_space/app.cpp

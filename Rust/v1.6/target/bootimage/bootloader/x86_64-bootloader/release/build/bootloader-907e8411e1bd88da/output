@@ -1,0 +1,7 @@
+cargo:rerun-if-changed=/mnt/c/Users/Tiwut/Downloads/TiwutOS/Cargo.toml
+cargo:rustc-link-search=native=/mnt/c/Users/Tiwut/Downloads/TiwutOS/target/bootimage/bootloader/x86_64-bootloader/release/build/bootloader-907e8411e1bd88da/out
+cargo:rustc-link-lib=static=kernel_bin-my_os
+cargo:rerun-if-env-changed=KERNEL
+cargo:rerun-if-env-changed=KERNEL_MANIFEST
+cargo:rerun-if-changed=/mnt/c/Users/Tiwut/Downloads/TiwutOS/target/x86_64-my_os/debug/my_os
+cargo:rerun-if-changed=build.rs
