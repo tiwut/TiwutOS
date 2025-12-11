@@ -7,3 +7,5 @@ Status:
 ##
 - graphical interface -> successful
 ##
+- Rust Kernel -> Development 
+##
