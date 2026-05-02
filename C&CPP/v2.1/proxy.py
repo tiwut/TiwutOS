@@ -33,7 +33,7 @@ while True:
                     with urllib.request.urlopen(req, timeout=5) as response:
                         html = response.read().decode('utf-8', errors='ignore')
                         text = strip_tags(html)
-                        text = text[:3800] # Limit to avoid OS buffer overflow
+                        text = text[:3800]
                         s.sendall((text + "\n").encode('utf-8'))
                         print("Response sent to TiwutOS.")
                 except Exception as e:
