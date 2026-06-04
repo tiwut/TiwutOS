@@ -1,7 +1,7 @@
 # TiwutOS
 A custom, bare-metal operating system built entirely from scratch in C++, Rust, and Assembly. TiwutOS started as a simple "Hello World" kernel and has rapidly evolved into a fully graphical, network-capable environment with a hybrid architecture.
 
-![TiwutOS Screenshot](v3.0/screenshot.png)
+![TiwutOS Screenshot](https://github.com/Nexus-Titan/TiwutOS/blob/main/v3.1/screenshot.png?raw=true)
 
 ## Versions
 
